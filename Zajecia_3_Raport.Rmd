@@ -1,0 +1,28 @@
+---
+title: "Raport_Biden"
+author: "NataliaS"
+date: "2025-03-11"
+output: html_document
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(qdap)
+library(wordcloud)
+
+text_2021 <- readLines("d:/Natalia/Documents/2 rok/psi/Biden - First address to Congress_2021 (1).txt", encoding="UTF-8")
+text_2024 <- readLines("d:/Natalia/Documents/2 rok/psi/Biden - State of the Union 2024 (1).txt", encoding="UTF-8")
+
+frequent_terms_2021 <- freq_terms(text_2021, stopwords = Top200Words)
+frequent_terms_2024 <- freq_terms(text_2024, stopwords = Top200Words)
+
+print("Najczęściej występujące słowa w 2021:")
+head(frequent_terms_2021, 10)
+print("Najczęściej występujące słowa w 2024:")
+head(frequent_terms_2024, 10)
+
+plot(frequent_terms_2021)
+plot(frequent_terms_2024)
+
+wordcloud(frequent_terms_2021$WORD, frequent_terms_2021$FREQ, min.freq = 4, colors = brewer.pal(8, "Dark2"))
+wordcloud(frequent_terms_2024$WORD, frequent_terms_2024$FREQ, min.freq = 4, colors = brewer.pal(8, "Dark2"))
